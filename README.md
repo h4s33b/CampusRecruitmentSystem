@@ -1,0 +1,1 @@
+An Application For Campus Recruitment System with NgMaterial2, Angular2, ng2Redux, Angularfire2 built on top of angular-cli.
