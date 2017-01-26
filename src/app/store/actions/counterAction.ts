@@ -12,6 +12,8 @@ export class CounterAction {
     static DECREMENTSUCCESS: string = 'DECREMENTSUCCESS';
     static USERSIGNIN: string = 'USERSIGNIN';
     static USERSIGNINSUCCESS: string = 'USERSIGNINSUCCESS';
+    static USERLOGOUT:string = 'USERLOGOUT';
+    static USERLOGOUTSUCCESS:string = 'USERLOGOUTSUCCESS';
 
     constructor(private ngRedux: NgRedux<IAppState>) {
     }
@@ -26,6 +28,10 @@ export class CounterAction {
 
     userSignIn(userObj): void {
         this.ngRedux.dispatch({ type: CounterAction.USERSIGNIN, payload: userObj });
+    }
+
+    logoutUser(){
+        this.ngRedux.dispatch({ type: CounterAction.USERLOGOUT });
     }
 
 

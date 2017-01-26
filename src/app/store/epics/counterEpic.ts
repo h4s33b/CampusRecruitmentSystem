@@ -68,4 +68,18 @@ export class CounterEpics {
                 //     payload : true
                 // });
             });
+
+    userLogout = (action$) =>
+        action$.ofType(CounterAction.USERLOGOUT)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.auth.logout().then(auth => {
+                        console.log(auth);
+                        return {
+                            type: CounterAction.USERLOGOUTSUCCESS
+                        }
+                    });
+            });
 }
