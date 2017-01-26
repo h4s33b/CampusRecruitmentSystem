@@ -76,10 +76,30 @@ export class CounterEpics {
             })
             .switchMap(({payload}) => {
                 return this.af.auth.logout().then(auth => {
-                        console.log(auth);
-                        return {
-                            type: CounterAction.USERLOGOUTSUCCESS
-                        }
-                    });
+                    console.log(auth);
+                    return {
+                        type: CounterAction.USERLOGOUTSUCCESS
+                    }
+                });
+            });
+
+    updateUserSettings = (action$) =>
+        action$.ofType(CounterAction.UPDATEUSERSETTINGS)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.database.object(`users/${payload.userID}`).set(payload)
+                .then(auth => {
+                    console.log(auth);
+                    return {
+                        type: CounterAction.UPDATEUSERSETTINGSSUCCESS
+                    }
+                }).catch(error=>{
+                    console.log(error);
+                    return {
+                        type: CounterAction.UPDATEUSERSETTINGSSUCCESS
+                    }
+                });
             });
 }

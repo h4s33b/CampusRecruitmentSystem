@@ -2,10 +2,10 @@
 <md-toolbar>
   <button md-button [mdMenuTriggerFor]="menu">Menu</button>
   <md-menu #menu="mdMenu">
-    <button md-menu-item>Settings</button>
+    <button md-menu-item (click)="gotoSettings()">Settings</button>
     <button md-menu-item (click)="logoutUser()">Logout</button>
   </md-menu>
 </md-toolbar>
 <p>
-  home-container works!
+  <app-home-components></app-home-components>
 </p>

@@ -12,8 +12,10 @@ export class CounterAction {
     static DECREMENTSUCCESS: string = 'DECREMENTSUCCESS';
     static USERSIGNIN: string = 'USERSIGNIN';
     static USERSIGNINSUCCESS: string = 'USERSIGNINSUCCESS';
-    static USERLOGOUT:string = 'USERLOGOUT';
-    static USERLOGOUTSUCCESS:string = 'USERLOGOUTSUCCESS';
+    static USERLOGOUT: string = 'USERLOGOUT';
+    static USERLOGOUTSUCCESS: string = 'USERLOGOUTSUCCESS';
+    static UPDATEUSERSETTINGS: string = 'UPDATEUSERSETTINGS';
+    static UPDATEUSERSETTINGSSUCCESS: string = 'UPDATEUSERSETTINGSSUCCESS';
 
     constructor(private ngRedux: NgRedux<IAppState>) {
     }
@@ -30,8 +32,12 @@ export class CounterAction {
         this.ngRedux.dispatch({ type: CounterAction.USERSIGNIN, payload: userObj });
     }
 
-    logoutUser(){
+    logoutUser() {
         this.ngRedux.dispatch({ type: CounterAction.USERLOGOUT });
+    }
+
+    updateUserSettings(f) {
+        this.ngRedux.dispatch({ type: CounterAction.UPDATEUSERSETTINGS,payload:f });
     }
 
 

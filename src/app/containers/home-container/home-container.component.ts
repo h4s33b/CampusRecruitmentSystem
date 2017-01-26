@@ -17,9 +17,9 @@ export class HomeContainerComponent implements OnInit {
   constructor(private counterAction:CounterAction, private router:Router) { 
     this.isLoggedIn$.subscribe(val=>{
       this.isLoggedIn = val;
-      if(!this.isLoggedIn.isLoggedIn){
-         this.router.navigate(['']);
-      }
+      // if(!this.isLoggedIn.isLoggedIn){
+      //    this.router.navigate(['']);
+      // }
     })
   }
 
@@ -28,6 +28,10 @@ export class HomeContainerComponent implements OnInit {
 
   logoutUser(){
     this.counterAction.logoutUser();
+  }
+
+  gotoSettings(){
+    this.router.navigate(['settings']);
   }
 
 }

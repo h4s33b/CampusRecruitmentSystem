@@ -18,6 +18,8 @@ export const counterReducer: Reducer<IAppState> =
         return Object.assign({}, state, { isLoggedIn: action.payload });
       case CounterAction.USERLOGOUTSUCCESS:
         return Object.assign({}, state, { isLoggedIn: false });
+        case CounterAction.UPDATEUSERSETTINGSSUCCESS:
+        return Object.assign({}, state);
       default:
         return state;
     }

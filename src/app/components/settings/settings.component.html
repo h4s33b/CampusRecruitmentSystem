@@ -1,0 +1,24 @@
+<md-card class="login-card">
+  <h3>Company Settings</h3>
+  <form #settingsForm="ngForm" novalidate>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Email" type="email" value="" name="email" disabled  [(ngModel)]="updateSettingsFormData.email">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Company Name" value="" type="text" name="CompanyName" [(ngModel)]="updateSettingsFormData.CompanyName">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Industry" value="" type="text" name="Industry" [(ngModel)]="updateSettingsFormData.Industry">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Company Info" name="CompanyInfo" [(ngModel)]="updateSettingsFormData.CompanyInfo"></textarea>
+    </md-input-container>
+        <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Address" name="Address" [(ngModel)]="updateSettingsFormData.Address"></textarea>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="NTN" value="" type="text" name="NTN" [(ngModel)]="updateSettingsFormData.NTN">
+    </md-input-container>
+    <button md-raised-button type="submit" (click)="updateSettings(settingsForm.valid, settingsForm.value)">Update</button>
+  </form>
+</md-card>

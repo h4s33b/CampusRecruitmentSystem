@@ -51,7 +51,8 @@ export class StoreModule {
       createEpicMiddleware(this.counterEpics.increment),
       createEpicMiddleware(this.counterEpics.decrement),
       createEpicMiddleware(this.counterEpics.userSignIn),
-      createEpicMiddleware(this.counterEpics.userLogout)
+      createEpicMiddleware(this.counterEpics.userLogout),
+      createEpicMiddleware(this.counterEpics.updateUserSettings)
       // More middleware here
     ];
     this.ngRedux.configureStore(

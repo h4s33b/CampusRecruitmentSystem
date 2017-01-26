@@ -1,0 +1,18 @@
+<md-card class="login-card">
+  <h3>Students Settings</h3>
+  <form #studentsSettingsForm="ngForm" novalidate>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Email" type="email" value="" name="email" disabled  [(ngModel)]="updateStudentsSettingsFormData.email">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Full Name" value="" type="text" name="FullName" [(ngModel)]="updateStudentsSettingsFormData.FullName">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Industry" value="" type="text" name="Industry" [(ngModel)]="updateStudentsSettingsFormData.Industry">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Bio" name="Bio" [(ngModel)]="updateStudentsSettingsFormData.Bio"></textarea>
+    </md-input-container>
+    <button md-raised-button type="submit" (click)="updateStudentSettings(studentsSettingsForm.valid, studentsSettingsForm.value)">Update</button>
+  </form>
+</md-card>

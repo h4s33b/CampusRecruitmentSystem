@@ -15,9 +15,13 @@ import { LoginContainerComponent } from './containers/login-container/login-cont
 import { LoginComponentsComponent } from './components/login-components/login-components.component';
 import { HomeContainerComponent } from './containers/home-container/home-container.component';
 import { HomeComponentsComponent } from './components/home-components/home-components.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { StudentSettingsComponent } from './components/student-settings/student-settings.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeContainerComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'students-settings', component: StudentSettingsComponent },
   { path: '', component: LoginContainerComponent },
   // { path: '**', component: NotFoundComponent }
 
@@ -44,7 +48,9 @@ const myFirebaseAuthConfig = {
     LoginContainerComponent,
     LoginComponentsComponent,
     HomeContainerComponent,
-    HomeComponentsComponent
+    HomeComponentsComponent,
+    SettingsComponent,
+    StudentSettingsComponent
   ],
   imports: [
     BrowserModule,
