@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 
 import { CounterAction } from '../actions/index';
 
@@ -48,25 +48,34 @@ export class CounterEpics {
                         provider: AuthProviders.Password,
                         method: AuthMethods.Password,
                     }).then(auth => {
-                        console.log(auth);
                         return {
-                            type: CounterAction.USERSIGNINSUCCESS,
-                            payload: true
-                        }
+                            type: CounterAction.USERSIGNINSUCCESSMIDDLE,
+                            payload: auth.uid
+                        };
+                    }).catch(err => {
+                        return Observable.of(null)
                     });
-                //     return Observable.fromPromise(
-                //     this.af.auth.login(result['user']['token'], { provider: AuthProviders.Custom, method: AuthMethods.CustomToken })
-                //       .then(auth => {
-                //         return {
-                //           type: AuthActions.LOGIN_SUCCESS,
-                //           payload: result['user']
-                //         };
-                //       })
-                //   )
-                // return Observable.of({
-                //     type: CounterAction.USERSIGNINSUCCESS,
-                //     payload : true
-                // });
+            });
+
+
+    getUserData = (action$) =>
+        action$.ofType(CounterAction.USERSIGNINSUCCESSMIDDLE)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.database.object(`users/${payload}`)
+                    .catch(err => {
+                        return Observable.of(null)
+                    })
+                    .map((checkedInObject) => {
+                        if (checkedInObject) {
+                            return {
+                                type: CounterAction.USERSIGNINSUCCESS,
+                                payload: checkedInObject
+                            }
+                        }
+                    })
             });
 
     userLogout = (action$) =>
@@ -75,11 +84,9 @@ export class CounterEpics {
                 console.log("UserData", val);
             })
             .switchMap(({payload}) => {
-                return this.af.auth.logout().then(auth => {
-                    console.log(auth);
-                    return {
-                        type: CounterAction.USERLOGOUTSUCCESS
-                    }
+                this.af.auth.logout();
+                return Observable.of({
+                    type: CounterAction.USERLOGOUTSUCCESS
                 });
             });
 
@@ -90,16 +97,127 @@ export class CounterEpics {
             })
             .switchMap(({payload}) => {
                 return this.af.database.object(`users/${payload.userID}`).set(payload)
-                .then(auth => {
+                    .then(auth => {
+                        console.log(auth);
+                        return {
+                            type: CounterAction.UPDATEUSERSETTINGSSUCCESS
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                        return {
+                            type: CounterAction.UPDATEUSERSETTINGSSUCCESS
+                        }
+                    });
+            });
+
+    postJob = (action$) =>
+        action$.ofType(CounterAction.POSTJOBS)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                var currentTime = new Date();
+                return this.af.database.object(`jobs/${payload.userID}/${currentTime.getMilliseconds()}`).set(payload)
+                    .then(auth => {
+                        console.log(auth);
+                        return {
+                            type: CounterAction.POSTJOBSSUCCESS
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                        return {
+                            type: CounterAction.POSTJOBSSUCCESS
+                        }
+                    });
+            });
+
+    signupCompany = (action$) =>
+        action$.ofType(CounterAction.SIGNUPCOMPANY)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.auth.createUser({
+                    email: payload.email,
+                    password: payload.password,
+                }).then(auth => {
                     console.log(auth);
+                    payload.userID = auth.uid;
+                    return this.af.database.object(`users/` + auth.uid).set(payload)
+                        .then(auth => {
+                            console.log(auth);
+                            return {
+                                type: CounterAction.SIGNUPCOMPANYSUCCESS,
+                                payload: payload.userID
+
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                            return {
+                                type: CounterAction.SIGNUPCOMPANYSUCCESS,
+                                payload: payload.userID
+                            }
+                        });
+                }).catch(error => {
+                    console.log(error)
                     return {
-                        type: CounterAction.UPDATEUSERSETTINGSSUCCESS
-                    }
-                }).catch(error=>{
-                    console.log(error);
-                    return {
-                        type: CounterAction.UPDATEUSERSETTINGSSUCCESS
+                        type: CounterAction.SIGNUPCOMPANYSUCCESS
                     }
                 });
+            });
+
+    signupStudent = (action$) =>
+        action$.ofType(CounterAction.SIGNUPSTUDENT)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.auth.createUser({
+                    email: payload.email,
+                    password: payload.password,
+                }).then(auth => {
+                    console.log(auth);
+                    payload.userID = auth.uid;
+                    return this.af.database.object(`users/` + auth.uid).set(payload)
+                        .then(auth => {
+                            console.log(auth);
+                            return {
+                                type: CounterAction.SIGNUPSTUDENTSUCCESS,
+                                payload: payload.userID
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                            return {
+                                type: CounterAction.SIGNUPSTUDENTSUCCESS,
+                                payload: payload.userID
+                            }
+                        });
+                }).catch(error => {
+                    console.log(error)
+                    return {
+                        type: CounterAction.SIGNUPSTUDENTSUCCESS,
+                        payload: payload.userID
+                    }
+                });
+            });
+
+    applyForJob = (action$) =>
+        action$.ofType(CounterAction.APPLYFORJOB)
+            .do((val) => {
+                console.log("UserData", val);
+            })
+            .switchMap(({payload}) => {
+                return this.af.database.list(`applications`).push(payload)
+                    .then(auth => {
+                        console.log(auth);
+                        return {
+                            type: CounterAction.APPLYFORJOBSUCCESS
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                        return {
+                            type: CounterAction.APPLYFORJOBSUCCESS
+                        }
+                    });
             });
 }

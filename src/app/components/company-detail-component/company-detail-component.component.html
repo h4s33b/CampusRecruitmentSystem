@@ -1,0 +1,18 @@
+<button md-raised-button (click)="backClicked()">Go Back</button>
+<h3>Company Details</h3>
+<md-card class="example-card" *ngFor="let abc of items | async">
+  <md-card-header>
+    <div md-card-avatar class="example-header-image"></div>
+    <md-card-title><b>{{abc.CompanyName}}</b></md-card-title>
+    <md-card-subtitle>{{abc.Industry}}</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="http://www.autismacceptancemonth.com/wp-content/uploads/logos-media-downloads/ASAN-logo-icon.png">
+  <md-card-content>
+    <p>
+      {{abc.CompanyInfo}}
+    </p>
+  </md-card-content>
+</md-card>
+<button md-raised-button [routerLink]="['postJob']">Post Job</button>
+<router-outlet></router-outlet>
+

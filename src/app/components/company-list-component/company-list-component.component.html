@@ -1,14 +1,14 @@
-<h3 style="text-align: center">Students List</h3>
+<h3 style="text-align: center">Company List</h3>
 <md-card class="example-card"  *ngFor="let abc of items | async">
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
-    <md-card-title><b>{{abc.FullName}}</b></md-card-title>
+    <md-card-title><b>{{abc.CompanyName}}</b></md-card-title>
     <md-card-subtitle>{{abc.Industry}}</md-card-subtitle>
   </md-card-header>
   <!--<img md-card-image src="assets/img/examples/shiba2.jpg">-->
   <md-card-content>
     <p>
-      {{abc.Bio}}
+      {{abc.CompanyInfo}}
     </p>
   </md-card-content>
   <md-card-actions>

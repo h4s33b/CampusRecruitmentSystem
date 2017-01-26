@@ -5,6 +5,7 @@ import { CounterAction } from '../../store/actions/index';
 import { LoginComponentsComponent } from '../../components/login-components/login-components.component';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 
 
 
@@ -17,6 +18,8 @@ export class LoginContainerComponent implements OnInit {
 
   @select() isLoggedIn$: Observable<boolean>;
   public isLoggedIn;
+  public userData;
+  public lastSearchQuery:Object = {}
   constructor(private counterAction: CounterAction,private router: Router) {
     this.isLoggedIn$.subscribe(val=>{
       console.log("val",val);
@@ -24,8 +27,12 @@ export class LoginContainerComponent implements OnInit {
       /**
        * TODO have to set it up.
        */
-      if(this.isLoggedIn.isLoggedIn){
+      if(!this.isLoggedIn.isLoggedIn){
+        this.router.navigate(['']);
+      }else if(this.isLoggedIn.isLoggedIn && this.isLoggedIn.userData.userType!='student'){
         this.router.navigate(['home']);
+      }else if(this.isLoggedIn.userData && this.isLoggedIn.userData.userType=='student'){
+        this.router.navigate(['company-list']);
       }
     })
    }
@@ -34,6 +41,7 @@ export class LoginContainerComponent implements OnInit {
   }
 
   public loginUserData(data) {
+    this.userData = data;
     this.counterAction.userSignIn(data);
   }
 

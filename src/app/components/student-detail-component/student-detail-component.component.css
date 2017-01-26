@@ -1,0 +1,10 @@
+.example-card {
+  width: 35%;
+  margin: 20px 5%;
+  float : left;
+}
+
+.example-header-image {
+  background-image: url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png');
+  background-size: cover;
+}

@@ -1,0 +1,10 @@
+/*.example-card {
+  width: 35%;
+  margin: 20px 5%;
+  float : left;
+}*/
+
+.example-header-image {
+  background-image: url('http://www.autismacceptancemonth.com/wp-content/uploads/logos-media-downloads/ASAN-logo-icon.png');
+  background-size: cover;
+}

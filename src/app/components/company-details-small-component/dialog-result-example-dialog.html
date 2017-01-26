@@ -1,0 +1,19 @@
+<h1 md-dialog-title>Apply For Job</h1>
+
+<form #applyJobForm="ngForm" novalidate>
+  <md-input-container class="example-full-width">
+    <input md-input placeholder="Email" type="email" value="" name="email" [(ngModel)]="applyJobData.email">
+  </md-input-container>
+  <md-input-container class="example-full-width">
+    <input md-input placeholder="Cell Number" value="" type="text" name="cellNumber" [(ngModel)]="applyJobData.cellNumber">
+  </md-input-container>
+  <md-input-container class="example-full-width">
+    <textarea md-input placeholder="Message" name="message" [(ngModel)]="applyJobData.message"></textarea>
+  </md-input-container>
+  <button md-raised-button type="button" (click)="submitJobForm(applyJobForm.valid, applyJobForm.value)">Apply Now</button>
+</form>
+
+<!--<md-dialog-actions>-->
+  <!--<button (click)="dialogRef.close('yes')">Yes</button>-->
+ <!-- <button md-dialog-close>No</button>
+</md-dialog-actions>-->

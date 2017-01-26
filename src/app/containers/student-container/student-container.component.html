@@ -1,12 +1,8 @@
-<!-- menu opens when trigger button is clicked -->
 <md-toolbar>
   <button md-button [mdMenuTriggerFor]="menu">Menu</button>
   <md-menu #menu="mdMenu">
     <button md-menu-item (click)="gotoSettings()">Settings</button>
-    <button md-menu-item (click)="gotoOldJobs()">Profile and Old Jobs</button>
     <button md-menu-item (click)="logoutUser()">Logout</button>
   </md-menu>
 </md-toolbar>
-<p>
-  <app-home-components></app-home-components>
-</p>
+<app-company-list-component></app-company-list-component>

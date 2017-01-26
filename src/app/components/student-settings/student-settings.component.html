@@ -1,3 +1,4 @@
+<button md-raised-button (click)="backClicked()">Go Back</button>
 <md-card class="login-card">
   <h3>Students Settings</h3>
   <form #studentsSettingsForm="ngForm" novalidate>
@@ -13,6 +14,6 @@
     <md-input-container class="example-full-width">
       <textarea md-input placeholder="Bio" name="Bio" [(ngModel)]="updateStudentsSettingsFormData.Bio"></textarea>
     </md-input-container>
-    <button md-raised-button type="submit" (click)="updateStudentSettings(studentsSettingsForm.valid, studentsSettingsForm.value)">Update</button>
+    <button md-raised-button type="button" (click)="updateStudentSettings(studentsSettingsForm.valid, studentsSettingsForm.value)">Update</button>
   </form>
 </md-card>

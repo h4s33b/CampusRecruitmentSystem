@@ -1,0 +1,24 @@
+<md-card class="login-card">
+<button md-raised-button [routerLink]="['../viewJobs']">Cancel</button>
+  <h3>User Login</h3>
+  <form #postJobForm="ngForm" novalidate>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Title" type="text" value="" name="jobTitle" [(ngModel)]="postJobData.jobTitle">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Department" value="" type="text" name="depart" [(ngModel)]="postJobData.depart">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Shift" value="" type="text" name="shift" [(ngModel)]="postJobData.shift">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input md-input placeholder="Expiry" value="" type="text" name="Expiry" [(ngModel)]="postJobData.Expiry">
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Details" name="Details" [(ngModel)]="postJobData.Details"></textarea>
+    </md-input-container>
+    <button md-raised-button type="submit" (click)="postJob(postJobForm.valid, postJobForm.value)">Post</button>
+  </form>
+</md-card>
+
+

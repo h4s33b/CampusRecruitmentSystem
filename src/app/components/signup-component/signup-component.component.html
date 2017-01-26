@@ -1,0 +1,59 @@
+<md-card class="login-card">
+  <h3>New User Sign UP</h3>
+  <button md-raised-button (click)="changeFormType(true)">SignUp as Student</button>
+  <button md-raised-button (click)="changeFormType(false)">SignUp as Company</button>
+
+  <div>Already have Account <a routerLink="/" routerLinkActive="active">Login</a></div>
+
+  <div *ngIf="userTypeStudent">
+    <h3>New Student</h3>
+    <form #studentSignUpForm="ngForm" novalidate>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Email" type="email" value="" name="email" [(ngModel)]="studentSignUpData.email">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Password" value="" type="password" name="password" [(ngModel)]="studentSignUpData.password">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Full Name" value="" type="text" name="FullName" [(ngModel)]="studentSignUpData.FullName">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Industry" value="" type="text" name="Industry" [(ngModel)]="studentSignUpData.Industry">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <textarea md-input placeholder="Bio" name="Bio" [(ngModel)]="studentSignUpData.Bio"></textarea>
+      </md-input-container>
+      <button md-raised-button type="submit" (click)="signUpStudent(studentSignUpForm.valid, studentSignUpForm.value)">Signup</button>
+    </form>
+  </div>
+
+  <div *ngIf="!userTypeStudent">
+    <h3>New Company</h3>
+    <form #companySignUpForm="ngForm" novalidate>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Email" type="email" value="" name="email" [(ngModel)]="companySignUpData.email">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Password" value="" type="password" name="password" [(ngModel)]="companySignUpData.password">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Company Name" value="" type="text" name="CompanyName" [(ngModel)]="companySignUpData.CompanyName">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="Industry" value="" type="text" name="Industry" [(ngModel)]="companySignUpData.Industry">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <textarea md-input placeholder="Company Info" name="CompanyInfo" [(ngModel)]="companySignUpData.CompanyInfo"></textarea>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <textarea md-input placeholder="Address" name="Address" [(ngModel)]="companySignUpData.Address"></textarea>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input md-input placeholder="NTN" value="" type="text" name="NTN" [(ngModel)]="companySignUpData.NTN">
+      </md-input-container>
+      <button md-raised-button type="submit" (click)="signUpCompany(companySignUpForm.valid, companySignUpForm.value)">Login</button>
+    </form>
+
+  </div>
+
+</md-card>

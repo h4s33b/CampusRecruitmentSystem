@@ -1,0 +1,10 @@
+<md-list>
+  <h3 md-subheader>Recent Jobs</h3>
+  <md-divider></md-divider>
+  <md-list-item *ngFor="let abc of items | async">
+    <h2 md-line> <b>Title : {{abc.jobTitle}}</b></h2>
+    <p md-line> Depart : {{abc.depart}} </p>
+    <button md-raised-button type="submit" (click)="showDetails(abc.$key)">View Details</button>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>

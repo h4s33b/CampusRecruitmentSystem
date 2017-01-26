@@ -12,6 +12,7 @@ export {CounterAction} from './actions';
 
 import { CounterEpics } from './epics';
 import { ICounter } from './ICounter';
+import { IUserData } from './userObj';
 
 
 //export { Observable } from 'rxjs';
@@ -21,6 +22,9 @@ import { ICounter } from './ICounter';
 export interface IAppState {
   counter?: ICounter;
   isLoggedIn? : boolean;
+  isSignUp? : boolean;
+  userEmail?: string;
+  userData? : IUserData;
 }
 
 export const AppReducer = combineReducers<IAppState>({
@@ -49,10 +53,16 @@ export class StoreModule {
   ) {
     const middleware = [
       createEpicMiddleware(this.counterEpics.increment),
+      createEpicMiddleware(this.counterEpics.getUserData),
       createEpicMiddleware(this.counterEpics.decrement),
       createEpicMiddleware(this.counterEpics.userSignIn),
       createEpicMiddleware(this.counterEpics.userLogout),
-      createEpicMiddleware(this.counterEpics.updateUserSettings)
+      createEpicMiddleware(this.counterEpics.updateUserSettings),
+      createEpicMiddleware(this.counterEpics.postJob),
+      createEpicMiddleware(this.counterEpics.signupCompany),
+      createEpicMiddleware(this.counterEpics.signupStudent),
+      createEpicMiddleware(this.counterEpics.applyForJob)
+
       // More middleware here
     ];
     this.ngRedux.configureStore(

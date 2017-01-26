@@ -1,0 +1,10 @@
+<h1 md-dialog-title>People Applied For this Job</h1>
+<md-list>
+  <md-list-item *ngFor="let folder of items | async" style="border:1px solid black;">
+    <h4 md-line>Email : {{folder.email}}</h4>
+    <p md-line> Cell Number : {{folder.cellNumber}} </p>
+  </md-list-item>
+</md-list>
+<md-dialog-actions>
+  <button md-dialog-close>Close</button>
+</md-dialog-actions>
