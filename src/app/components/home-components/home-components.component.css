@@ -1,0 +1,10 @@
+.example-card {
+  width: 35%;
+  margin: 20px 5%;
+  float : left;
+}
+
+.example-header-image {
+  background-image: url('http://knowledge-commons.com/static/assets/images/avatar.png');
+  background-size: cover;
+}
