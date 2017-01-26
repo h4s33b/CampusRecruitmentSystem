@@ -48,7 +48,7 @@ const appRoutes: Routes = [
       { path: 'postJob', component: CompanyPostJobComponentComponent }
     ], canActivate: [LoggedInGuard]
   },
-  { path: 'admin', component: AdminContainerComponent,canActivate: [AdminGuard] },
+  { path: 'admin', component: AdminContainerComponent},
   { path: '', component: LoginContainerComponent }
 
 ];
